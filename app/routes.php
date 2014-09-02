@@ -1,5 +1,5 @@
 <?php
-header('Access-Control-Allow-Origin: http://www.halukdemir.com');
+header('Access-Control-Allow-Origin: *');
 /*
 |--------------------------------------------------------------------------
 | Application Routes
