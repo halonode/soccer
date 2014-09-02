@@ -152,6 +152,7 @@ class LigController extends \BaseController {
 
 		$homeGoals = intval(abs($homePower/$awayPower) + RAND()  / 10000);
 		$awayGoals = intval(abs($awayPower/$homePower) + RAND()  / 10000);
+		dd($homeGoals );
 
 		if($homeGoals==$awayGoals){
 			$goalDifference =	0;
