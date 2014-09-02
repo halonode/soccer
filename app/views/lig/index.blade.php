@@ -9,7 +9,7 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/tooltip.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/popover.min.js"></script>
 
-	<link href="/css/xeditable.css" rel="stylesheet">
+	<link href="/soccer/public/css/xeditable.css" rel="stylesheet">
 	
 
 
@@ -20,7 +20,7 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-resource.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-sanitize.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore.js"></script>
-	<script src="/js/xeditable.js"></script>
+	<script src="/soccer/public/js/xeditable.js"></script>
   <script>
     angular.module("app",[]).constant("CSRF_TOKEN", '<?php echo csrf_token(); ?>');
   </script>
@@ -56,7 +56,7 @@
 
 
 <div class="col-md-6" ng-controller="LeagueController">
-<h1>League Status <img id="spinner" ng-src="/images/spinner.gif" style="display:none;"></h1>
+<h1>League Status <img id="spinner" ng-src="/soccer/public/images/spinner.gif" style="display:none;"></h1>
 <table class="table table-striped table-bordered ">
 	<thead>
 		<tr>
@@ -143,9 +143,9 @@ app.run(function(editableOptions) {
 
 app.config(function($routeProvider,$httpProvider) {
 
-	  $routeProvider.when('/lig/:id', {
+	  $routeProvider.when('/soccer/public/lig/:id', {
             templateUrl: function(urlattr){
-                return '/lig/' + urlattr.id;
+                return '/soccer/public/lig/' + urlattr.id;
             },
             controller: 'LeagueController'
         });
@@ -177,7 +177,7 @@ app.controller('LeagueController', function($scope, $http) {
   $scope.loading = true;
   $scope.getData = function(){
 
- 				$http.get('/updateLig')
+ 				$http.get('/soccer/public/updateLig')
 			    .success(function (d) {
 				  $scope.tempTeams=d;
 				  $scope.loading = false;
@@ -193,15 +193,15 @@ app.controller('ScoresController', function($scope, $http) {
 
 $scope.updateHomeMatch = function(data) {
 	this.$parent.data.homeScore=data;
-    return $http.post('/updateMatch', this.$parent.data);
+    return $http.post('/soccer/public/updateMatch', this.$parent.data);
 };
 
 $scope.updateAwayMatch = function(data) {
 	this.$parent.data.awayScore=data;
-    return $http.post('/updateMatch', this.$parent.data);
+    return $http.post('/soccer/public/updateMatch', this.$parent.data);
 };
 
-	$http.get('/getCurrentWeek')
+	$http.get('/soccer/public/getCurrentWeek')
 			    .success(function (d) {
 				  $scope.week=d;
 			    });
@@ -211,7 +211,7 @@ $scope.updateAwayMatch = function(data) {
 		$('.displayFix').css("display","block");
 		$('.fixButtons').css("margin-top","0px");
 			$scope.loading = true; 				 
-			$http.get('/getCurrentWeek')
+			$http.get('/soccer/public/getCurrentWeek')
 			    .success(function (d) {
 				  $scope.week=d;
 				  if(d=={{Team::calcLeagueLength()}}){
@@ -220,12 +220,12 @@ $scope.updateAwayMatch = function(data) {
 				  }
 				  if(d>3){
 				  	$('.displayWinnerFix').css("display","block");
-				  	$http.get('/updateWinners')
+				  	$http.get('/soccer/public/updateWinners')
 				    .success(function (ddd) {
 					  $scope.tempWinners=ddd;
 				    });
 				  }
-					  $http.get('/updateScores', {
+					  $http.get('/soccer/public/updateScores', {
 				        params: {
 				            week: d,
 				        }
@@ -243,16 +243,16 @@ $scope.updateAwayMatch = function(data) {
 		$('.fixButtons').css("margin-top","0px");
 		$('.displayWinnerFix').css("display","block");
 
-		$http.get('/playAllMatches')
+		$http.get('/soccer/public/playAllMatches')
 			.success(function (data) {
 			$scope.tempScores=data;
 
-			$http.get('/getCurrentWeek')
+			$http.get('/soccer/public/getCurrentWeek')
 			    .success(function (d) {
 				$scope.week=d;
 				});
 
-			$http.get('/updateWinners')
+			$http.get('/soccer/public/updateWinners')
 				.success(function (ddd) {
 				$scope.tempWinners=ddd;
 				});
