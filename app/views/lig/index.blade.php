@@ -133,7 +133,6 @@
 
 </div>
 
-<a class="pUpdate" data-pk="1">12</a>
 <script type="text/javascript">
 var app = angular.module('App',['ngResource', 'ngRoute','xeditable']);
 
