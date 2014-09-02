@@ -57,7 +57,7 @@ return array(
 			'host'      => 'localhost',
 			'database'  => 'soccer',
 			'username'  => 'root',
-			'password'  => '',
+			'password'  => 'mavi1233',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
