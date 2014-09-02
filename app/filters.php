@@ -21,6 +21,15 @@ App::before(function($request)
 	//
 });
 
+App::before(function($request)
+{
+    if (Request::getMethod() == "OPTIONS") {
+        $headers = array(
+            'Access-Control-Allow-Methods'=> 'POST, GET, OPTIONS, PUT, DELETE',
+            'Access-Control-Allow-Headers'=> 'X-Requested-With, content-type',);
+        return Response::make('', 200, $headers);
+    }
+});
 
 App::after(function($request, $response)
 {
